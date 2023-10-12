@@ -1,4 +1,4 @@
-//Ingrese la Cadena lgcdsdm
+//Ingrese la Cadena 
 const cadenaU = "l_[1,1]"; //Cadena ingresada por el usuario
 console.log("La cadena ingresada por el usuario es:",cadenaU);
 
@@ -25,7 +25,7 @@ function cadenaAutomata(cadena) {
   }
   return resultado;
 }
-//Implementamos el metodo cadena automata pasando como parametro la cadena del usuario
+//Implementamos el metodo cadenAutomata pasando como parametro la cadena del usuario
 const cadena = cadenaAutomata(cadenaU);
 console.log("La cadena para el automata es", cadena);
 //
@@ -38,7 +38,7 @@ function reconocerCadena(matrizTransicion, cadena) {
     }
     estado = matrizTransicion[estado][caracter];
   }
-  // Después de procesar toda la cadena, verificamos si el estado actual es uno de los estados finales
+  //Verificamos si el estado actual es uno de los estados finales
   const estadosFinales = new Set(['R']);
   return estadosFinales.has(estado);
 }
@@ -75,7 +75,7 @@ const matrizTransicion = {
   'AA': {'g': 'AB'},
   'AB': {'m': 'R'}
 };
-
+//Implementamos el metodo reconocerCadena
 if (reconocerCadena(matrizTransicion, cadena)) {
   console.log(`La cadena "${cadena}" es aceptada por la definición regular.`);
 } else {
