@@ -1,16 +1,46 @@
+//Ingrese la Cadena lgcdsdm
+const cadenaU = "l_[1,1]"; //Cadena ingresada por el usuario
+console.log("La cadena ingresada por el usuario es:",cadenaU);
+
+//Transformamos la cadena ingresada por el usuario
+function cadenaAutomata(cadena) {
+  let resultado = '';
+  for (let i = 0; i < cadenaU.length; i++) {
+    const caracter = cadenaU[i].toLowerCase();
+    if (/[a-z]/.test(caracter)) {
+      resultado += 'l';
+    }else if (/[0-9]/.test(caracter)) {
+      resultado += 'd';
+    }else if (caracter === '_') {
+      resultado += 'g';
+    }else if (caracter === '[') {
+      resultado += 'c';
+    }else if (caracter === ']') {
+      resultado += 'm';
+    }else if (caracter === ',') {
+      resultado += 's';
+    }else {
+      resultado += cadenaU[i];
+    }
+  }
+  return resultado;
+}
+//Implementamos el metodo cadena automata pasando como parametro la cadena del usuario
+const cadena = cadenaAutomata(cadenaU);
+console.log("La cadena para el automata es", cadena);
+//
 function reconocerCadena(matrizTransicion, cadena) {
-  let estadoActual = 'A';  // Comenzamos en el estado inicial A
+  let estado = 'A';  // Estado inicial
   for (let i = 0; i < cadena.length; i++) {
     const caracter = cadena.charAt(i);
-    if (!matrizTransicion[estadoActual][caracter]) {
-      return false;  // Si no hay transición para el caracter, la cadena no es válida
+    if (!matrizTransicion[estado][caracter]) {
+      return false;  //Si es vacio, no hay transicion, cadena no valida
     }
-    estadoActual = matrizTransicion[estadoActual][caracter];
+    estado = matrizTransicion[estado][caracter];
   }
-
   // Después de procesar toda la cadena, verificamos si el estado actual es uno de los estados finales
   const estadosFinales = new Set(['R']);
-  return estadosFinales.has(estadoActual);
+  return estadosFinales.has(estado);
 }
 
 // Matriz del AFD
@@ -45,9 +75,6 @@ const matrizTransicion = {
   'AA': {'g': 'AB'},
   'AB': {'m': 'R'}
 };
-
-// Cadena a verificar
-const cadena = "lgcdsdm";
 
 if (reconocerCadena(matrizTransicion, cadena)) {
   console.log(`La cadena "${cadena}" es aceptada por la definición regular.`);
